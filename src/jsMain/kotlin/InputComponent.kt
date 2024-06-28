@@ -1,23 +1,20 @@
-import org.w3c.dom.HTMLFormElement
-import org.w3c.dom.HTMLInputElement
-import react.FC
-import react.Props
+import web.html.HTMLFormElement
+import react.*
+import web.html.HTMLInputElement
 import react.dom.events.ChangeEventHandler
 import react.dom.events.FormEventHandler
-import react.dom.html.InputType
+import web.html.InputType
 import react.dom.html.ReactHTML.form
 import react.dom.html.ReactHTML.input
-import react.useState
 
-external interface InputProps: Props {
+external interface InputProps : Props {
     var onSubmit: (String) -> Unit
 }
 
-val InputComponent = FC<InputProps>{props ->
-
+val InputComponent = FC<InputProps> { props ->
     val (text, setText) = useState("")
 
-    val submitHandler : FormEventHandler<HTMLFormElement> = {
+    val submitHandler: FormEventHandler<HTMLFormElement> = {
         it.preventDefault()
         setText("")
         props.onSubmit(text)
