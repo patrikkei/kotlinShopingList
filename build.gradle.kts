@@ -98,6 +98,18 @@ tasks {
     }
 }
 
+tasks {
+    val jsProductionWebpack by getting(KotlinWebpack::class) {
+        outputFileName = "bundle.js"
+        outputPath = file("$buildDir/distributions")
+    }
+
+    withType<Jar> {
+        from(jsProductionWebpack)
+        into("static")
+    }
+}
+
 distributions {
     main {
         contents {
