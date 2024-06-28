@@ -30,7 +30,6 @@ kotlin {
             webpackTask {
                 output.libraryTarget = "umd"
                 outputFileName = "bundle.js"
-                outputPath = file("$buildDir/distributions")
             }
         }
     }
@@ -91,7 +90,7 @@ tasks.named<Jar>("jvmJar").configure {
     }
     val webpackTask = tasks.named<KotlinWebpack>(taskName)
     dependsOn(webpackTask)
-    from(webpackTask.map { it.destinationDirectory.get().asFile }) // bring output file along into the JAR
+    from(webpackTask.map { it.destinationDirectory }) // bring output file along into the JAR
     into("static")
 }
 
